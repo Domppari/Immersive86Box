@@ -1940,7 +1940,7 @@ fdc_callback(void *priv)
         case 0x0f: /*Seek*/
             fdc->st0  = 0x20 | (fdc->params[0] & 3);
             fdc->stat = 0x10 | (1 << fdc->rw_drive);
-            if (fdd_get_turbo(1 << fdc->rw_drive)) {
+            if (fdd_get_turbo(real_drive(fdc, fdc->rw_drive))) {            
                 if (fdc->flags & FDC_FLAG_PCJR) {
                     fdc->fintr     = 1;
                     fdc->interrupt = -4;
